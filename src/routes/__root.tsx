@@ -1,12 +1,5 @@
-import {
-  Outlet,
-  createRootRoute,
-  Link,
-  useLocation,
-} from '@tanstack/react-router';
-import ThemeToggle from '@/components/theme-toggle.tsx';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { FileRoutesByTo } from '@/routeTree.gen.ts';
-import { Button } from '@/components/ui/button.tsx';
 import RootLayout from '@/components/root-layout.tsx';
 
 export const Route = createRootRoute({
