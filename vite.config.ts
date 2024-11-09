@@ -7,7 +7,6 @@ import { ghPages } from 'vite-plugin-gh-pages';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), ghPages(), TanStackRouterVite()],
-  base: './',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
