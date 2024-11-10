@@ -37,7 +37,7 @@ export default function Navbar() {
   return (
     <div
       className={
-        'sticky z-50 top-0 w-full bg-background border-b-[2px] -mt-3 px-3'
+        'sticky z-50 top-0 w-full bg-background border-b-[2px] -mt-3 px-8'
       }
     >
       <div className={'w-full flex justify-center  items-center py-2  '}>

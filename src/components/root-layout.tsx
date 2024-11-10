@@ -16,7 +16,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <div
         className={
-          'flex flex-col justify-center items-center w-screen h-screen gap-2 py-3 bg-background text-foreground'
+          'flex flex-col justify-center items-center w-full h-screen gap-2 py-3 bg-background text-foreground'
         }
       >
         <Navbar />

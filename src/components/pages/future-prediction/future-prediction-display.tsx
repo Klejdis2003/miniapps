@@ -58,7 +58,7 @@ export default function FuturePredictionDisplay({
     <div className={'flex flex-col items-center justify-center h-full'}>
       <Card
         className={
-          'w-fit min-w-[25rem] sm:min-w-[30rem] md:min-w-[35rem] p-6 rounded-xl drop-shadow-xl'
+          'w-fit min-w-[20rem] sm:min-w-[35rem] p-6 rounded-xl drop-shadow-xl'
         }
       >
         <CardHeader>
