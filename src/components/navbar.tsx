@@ -18,6 +18,9 @@ function isHomepage(path: string) {
 
 export default function Navbar() {
   const currentPath = useLocation().pathname;
+  const title = pathnameToTitle(
+    currentPath.replace('/', '').split('/')[0] as NavRoute,
+  );
 
   const ConditionalHomeButton = () => {
     if (!isHomepage(currentPath)) {
@@ -50,7 +53,9 @@ export default function Navbar() {
           <header className={'flex flex-row gap-2 items-center'}>
             <LayoutGrid />
             <h1 className={'text-lg sm:text-2xl font-bold'}>
-              <Link to={'/'}>Klejdis Mini Apps</Link>
+              <Link to={'/'}>
+                Klejdis Mini Apps {title != 'Home' ? ` / ${title}` : ''}
+              </Link>
             </h1>
           </header>
           <div className={'flex flex-row gap-3'}>

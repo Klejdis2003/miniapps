@@ -11,8 +11,8 @@ export function cn(...inputs: ClassValue[]) {
  * @param pathname The pathname to convert.
  * @returns The title.
  */
-export function pathnameToTitle(pathname: string) {
-  if (pathname === '/') return 'Home';
+export function pathnameToTitle(pathname: string, homeTitle = 'Home') {
+  if (pathname === '/') return homeTitle;
 
   const name = (pathname as string).replaceAll('/', '');
   return capitalizeAllWords(dashesToSpaces(name));
