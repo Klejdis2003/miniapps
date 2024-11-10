@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { Link, useLocation } from '@tanstack/react-router';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useLocation } from '@tanstack/react-router';
+import { AnimatePresence } from 'framer-motion';
 import MainAnimation from '@/components/main-animation.tsx';
 import Navbar from '@/components/navbar.tsx';
 import { NavRoute } from '@/routes/__root.tsx';
@@ -16,7 +16,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <div
         className={
-          'flex flex-col justify-center items-center  w-screen h-screen p-3 gap-2 bg-background text-foreground'
+          'flex flex-col justify-center items-center w-screen h-screen gap-2 py-3 bg-background text-foreground'
         }
       >
         <Navbar />
