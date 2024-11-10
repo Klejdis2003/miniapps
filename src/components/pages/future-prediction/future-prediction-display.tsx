@@ -56,12 +56,18 @@ export default function FuturePredictionDisplay({
 
   return (
     <div className={'flex flex-col items-center justify-center h-full'}>
-      <Card className={'w-fit p-6 rounded-xl drop-shadow-2xl'}>
+      <Card
+        className={
+          'w-fit min-w-[25rem] sm:min-w-[30rem] md:min-w-[35rem] p-6 rounded-xl drop-shadow-xl'
+        }
+      >
         <CardHeader>
-          <CardTitle>Future Prediction</CardTitle>
-          <CardDescription>Enter your details</CardDescription>
+          <CardTitle>Your Information</CardTitle>
+          <CardDescription>
+            Enter your details and let us do the rest
+          </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className={'flex flex-col gap-1'}>
           <Form {...form}>
             <FormField
               control={form.control}

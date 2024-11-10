@@ -35,10 +35,12 @@ export default function Navbar() {
   };
 
   return (
-    <div
-      className={'sticky z-50 top-0 w-full border-b-[1px] bg-background -mt-3 '}
-    >
-      <div className={'w-full flex justify-center  items-center py-2'}>
+    <div className={'sticky z-50 top-0 w-full bg-background -mt-3 px-3'}>
+      <div
+        className={
+          'w-full flex justify-center  items-center py-2 border-b-[3px] '
+        }
+      >
         <div
           className={
             'flex flex-row justify-between w-full sm:w-[90%] items-center h-full '
