@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { NavRoute } from '@/routes/__root.tsx';
 
@@ -27,4 +27,8 @@ export function capitalizeAllWords(text: string) {
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+}
+
+export function getPathnameBase(pathname: NavRoute) {
+  return '/' + pathname.split('/')[1];
 }

@@ -1,16 +1,9 @@
 import { Button } from '@/components/ui/button.tsx';
-import {
-  Link,
-  useLocation,
-  useMatches,
-  useRouter,
-} from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
 import ThemeToggle from '@/components/theme-toggle.tsx';
 import { HomeIcon, LayoutGrid } from 'lucide-react';
-import BreadcrumbResponsive from '@/components/ui/extended-breadcrumb.tsx';
-import ExtendedBreadcrumb from '@/components/ui/extended-breadcrumb.tsx';
 import { NavRoute } from '@/routes/__root.tsx';
-import { pathnameToTitle } from '@/lib/utils.ts';
+import { getPathnameBase, pathnameToTitle } from '@/lib/utils.ts';
 
 function isHomepage(path: string) {
   return path === '/';
@@ -19,7 +12,8 @@ function isHomepage(path: string) {
 export default function Navbar() {
   const currentPath = useLocation().pathname;
   const title = pathnameToTitle(
-    currentPath.replace('/', '').split('/')[0] as NavRoute,
+    getPathnameBase(currentPath as NavRoute),
+    'Klejdis Mini Apps',
   );
 
   const ConditionalHomeButton = () => {
@@ -52,11 +46,7 @@ export default function Navbar() {
         >
           <header className={'flex flex-row gap-2 items-center'}>
             <LayoutGrid />
-            <h1 className={'text-lg sm:text-2xl font-bold'}>
-              <Link to={'/'}>
-                Klejdis Mini Apps {title != 'Home' ? ` / ${title}` : ''}
-              </Link>
-            </h1>
+            <h1 className={'text-lg sm:text-2xl font-bold'}>{title}</h1>
           </header>
           <div className={'flex flex-row gap-3'}>
             <ConditionalHomeButton />
