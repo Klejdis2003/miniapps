@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createFileRoute, useRouter } from '@tanstack/react-router';
-import SecretInputForm from '@/components/pages/secret-input-form.tsx';
+import SecretInputForm from '@/components/pages/future-prediction/secret-input-form.tsx';
 
 export const Route = createFileRoute('/future-prediction/secret-input')({
   component: RouteComponent,

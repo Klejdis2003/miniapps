@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as RandomGeneratorIndexImport } from './routes/random-generator/index'
 import { Route as FuturePredictionIndexImport } from './routes/future-prediction/index'
 import { Route as FuturePredictionSecretInputImport } from './routes/future-prediction/secret-input'
 
@@ -20,6 +21,12 @@ import { Route as FuturePredictionSecretInputImport } from './routes/future-pred
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RandomGeneratorIndexRoute = RandomGeneratorIndexImport.update({
+  id: '/random-generator/',
+  path: '/random-generator/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -61,6 +68,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FuturePredictionIndexImport
       parentRoute: typeof rootRoute
     }
+    '/random-generator/': {
+      id: '/random-generator/'
+      path: '/random-generator'
+      fullPath: '/random-generator'
+      preLoaderRoute: typeof RandomGeneratorIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -70,12 +84,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute
   '/future-prediction': typeof FuturePredictionIndexRoute
+  '/random-generator': typeof RandomGeneratorIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute
   '/future-prediction': typeof FuturePredictionIndexRoute
+  '/random-generator': typeof RandomGeneratorIndexRoute
 }
 
 export interface FileRoutesById {
@@ -83,18 +99,28 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute
   '/future-prediction/': typeof FuturePredictionIndexRoute
+  '/random-generator/': typeof RandomGeneratorIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/future-prediction/secret-input' | '/future-prediction'
+  fullPaths:
+    | '/'
+    | '/future-prediction/secret-input'
+    | '/future-prediction'
+    | '/random-generator'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/future-prediction/secret-input' | '/future-prediction'
+  to:
+    | '/'
+    | '/future-prediction/secret-input'
+    | '/future-prediction'
+    | '/random-generator'
   id:
     | '__root__'
     | '/'
     | '/future-prediction/secret-input'
     | '/future-prediction/'
+    | '/random-generator/'
   fileRoutesById: FileRoutesById
 }
 
@@ -102,12 +128,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FuturePredictionSecretInputRoute: typeof FuturePredictionSecretInputRoute
   FuturePredictionIndexRoute: typeof FuturePredictionIndexRoute
+  RandomGeneratorIndexRoute: typeof RandomGeneratorIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FuturePredictionSecretInputRoute: FuturePredictionSecretInputRoute,
   FuturePredictionIndexRoute: FuturePredictionIndexRoute,
+  RandomGeneratorIndexRoute: RandomGeneratorIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -122,7 +150,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/future-prediction/secret-input",
-        "/future-prediction/"
+        "/future-prediction/",
+        "/random-generator/"
       ]
     },
     "/": {
@@ -133,6 +162,9 @@ export const routeTree = rootRoute
     },
     "/future-prediction/": {
       "filePath": "future-prediction/index.tsx"
+    },
+    "/random-generator/": {
+      "filePath": "random-generator/index.tsx"
     }
   }
 }

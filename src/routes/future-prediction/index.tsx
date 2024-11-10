@@ -1,6 +1,6 @@
 import { createFileRoute, useParams, useSearch } from '@tanstack/react-router';
 import { z } from 'zod';
-import FuturePredictionDisplay from '@/components/pages/future-prediction-display.tsx';
+import FuturePredictionDisplay from '@/components/pages//future-prediction/future-prediction-display.tsx';
 
 const searchParamsSchema = z.object({
   v: z.string().base64().optional(), //named v to hide what it does from end users

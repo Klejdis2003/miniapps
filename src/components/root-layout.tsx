@@ -3,6 +3,8 @@ import { Link, useLocation } from '@tanstack/react-router';
 import { AnimatePresence, motion } from 'framer-motion';
 import MainAnimation from '@/components/main-animation.tsx';
 import Navbar from '@/components/navbar.tsx';
+import { NavRoute } from '@/routes/__root.tsx';
+import ExtendedBreadcrumb from '@/components/ui/extended-breadcrumb.tsx';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -14,10 +16,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <div
         className={
-          'flex flex-col w-screen h-screen p-3 bg-background text-foreground'
+          'flex flex-col justify-center items-center  w-screen h-screen p-3 gap-2 bg-background text-foreground'
         }
       >
         <Navbar />
+        <ExtendedBreadcrumb
+          pathname={currentPath as NavRoute}
+          className={'w-fit'}
+        />
         <AnimatePresence mode={'wait'}>
           <MainAnimation animationKey={currentPath}>{children}</MainAnimation>
         </AnimatePresence>

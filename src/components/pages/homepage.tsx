@@ -6,7 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { AppWindow, Settings, WandSparklesIcon, Zap } from 'lucide-react';
+import {
+  AppWindow,
+  Dices,
+  Settings,
+  WandSparklesIcon,
+  Zap,
+} from 'lucide-react';
 import { ComponentType, SVGProps } from 'react';
 import { Link } from '@tanstack/react-router';
 import { NavRoute } from '@/routes/__root.tsx';
@@ -26,7 +32,12 @@ export default function Homepage() {
       icon: WandSparklesIcon,
       path: '/future-prediction',
     },
-    { name: 'Quick Notes', description: 'Jot down ideas instantly', icon: Zap },
+    {
+      name: 'Random Generator',
+      description: 'Generate any random value you want',
+      icon: Dices,
+      path: '/random-generator',
+    },
     {
       name: 'Settings Hub',
       description: 'Manage all app settings in one place',
