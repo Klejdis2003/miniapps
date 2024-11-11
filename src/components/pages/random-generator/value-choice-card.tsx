@@ -74,7 +74,11 @@ export default function ValueChoiceCard() {
           selectedOption={selectedOption}
           onSuccessfulEntry={onSuccessfulEntry}
         />
-        <div className={'flex flex-row justify-between'}>
+        <div
+          className={
+            'flex flex-col gap-y-2 items-center justify-between sm:flex-row'
+          }
+        >
           <div className={'flex flex-row items-center gap-x-2'}>
             <Label htmlFor={'number-of-choices'}>Number of Choices</Label>
             <TooltipProvider>
@@ -102,6 +106,7 @@ export default function ValueChoiceCard() {
             </TooltipProvider>
           </div>
           <Button
+            className={'w-full sm:w-48'}
             disabled={values.length === 0}
             onClick={() => {
               const chosenValues = randomChoices(values, numberOfChoices);
@@ -188,7 +193,7 @@ function EnteredValues({
   onClear,
 }: EnteredValuesProps) {
   return (
-    <Popover>
+    <Popover modal={true}>
       <PopoverTrigger asChild>
         <Button variant={'secondary'}>Entered Values</Button>
       </PopoverTrigger>
