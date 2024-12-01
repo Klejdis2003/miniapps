@@ -11,7 +11,7 @@ import { JobApplication } from '@/api/types.ts';
 function createJobApplication(
   jobApplication: Pick<
     JobApplication,
-    'companyName' | 'modality' | 'position'
+    'companyName' | 'modality' | 'position' | 'id'
   > &
     Partial<JobApplication>,
 ): JobApplication {

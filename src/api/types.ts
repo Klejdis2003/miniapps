@@ -9,12 +9,12 @@ type JobApplication = {
   notes?: string;
 };
 
-type JobModality = 'in person' | 'remote' | 'hybrid';
+type JobModality = 'In Person' | 'Remote' | 'Hybrid';
 type JobApplicationStatus =
-  | 'applied'
-  | 'interview'
-  | 'rejected'
-  | 'offer'
-  | 'no response';
+  | 'Applied'
+  | 'Interview'
+  | 'Rejected'
+  | 'Offer'
+  | 'No Response';
 
 export type { JobModality, JobApplicationStatus, JobApplication };

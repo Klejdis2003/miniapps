@@ -3,10 +3,11 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Dices, Settings, WandSparklesIcon } from 'lucide-react';
+import { Dices, LucideCalendarClock, WandSparklesIcon } from 'lucide-react';
 import { ComponentType, SVGProps } from 'react';
 import { Link } from '@tanstack/react-router';
 import { NavRoute } from '@/routes/__root.tsx';
@@ -32,9 +33,11 @@ const apps: App[] = [
     path: '/random-generator',
   },
   {
-    name: 'Settings Hub',
-    description: 'Manage all app settings in one place',
-    icon: Settings,
+    name: 'Job Application Tracker',
+    description:
+      'Track your job applications, interviews, and offers with secure cloud storage',
+    icon: LucideCalendarClock,
+    path: '/job-app-tracker',
   },
 ];
 
@@ -56,13 +59,15 @@ export default function Homepage() {
               <CardHeader>
                 <app.icon className="w-10 h-10 mb-2 text-primary" />
                 <CardTitle>{app.name}</CardTitle>
-                <CardDescription>{app.description}</CardDescription>
+                <CardDescription className={'min-h-10'}>
+                  {app.description}
+                </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardFooter className={''}>
                 <Button variant="secondary" className="w-full" asChild>
                   <Link to={app.path}>Open App</Link>
                 </Button>
-              </CardContent>
+              </CardFooter>
             </Card>
           ))}
         </section>

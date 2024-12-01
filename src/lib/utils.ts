@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { NavRoute } from '@/routes/__root.tsx';
+import { FieldValues, FormState } from 'react-hook-form';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -52,4 +53,30 @@ export function randomChoices<T>(choices: T[], numberOfChoices: number = 1) {
     values.splice(randomIndex, 1);
   }
   return chosenValues;
+}
+
+/**
+ * Convert a camelCase string to a title.
+ * @param text The text to convert.
+ * @returns The converted text.
+ * @example camelCaseToTitle('camelCase') => 'Camel Case'
+ */
+export function camelCaseToTitle(text: string) {
+  return text
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (str) => str.toUpperCase())
+    .trim();
+}
+
+/**
+ * Gets form errors from react-hook-form and converts them to an array of human-readable strings.
+ * @param formState The form state from react-hook-form.
+ * @returns An array of form errors.
+ */
+export function getFormErrorsAsArray<T extends FieldValues>(
+  formState: FormState<T>,
+) {
+  return Object.keys(formState.errors).map((key) => {
+    return `${camelCaseToTitle(key)}: ${formState.errors[key as keyof T]!.message}`;
+  });
 }

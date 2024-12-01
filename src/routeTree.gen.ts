@@ -10,137 +10,202 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as RandomGeneratorIndexImport } from './routes/random-generator/index'
-import { Route as FuturePredictionIndexImport } from './routes/future-prediction/index'
-import { Route as FuturePredictionSecretInputImport } from './routes/future-prediction/secret-input'
+import { Route as rootRoute } from './routes/__root';
+import { Route as AuthenticatedImport } from './routes/_authenticated';
+import { Route as IndexImport } from './routes/index';
+import { Route as RandomGeneratorIndexImport } from './routes/random-generator/index';
+import { Route as JobAppTrackerIndexImport } from './routes/job-app-tracker/index';
+import { Route as FuturePredictionIndexImport } from './routes/future-prediction/index';
+import { Route as FuturePredictionSecretInputImport } from './routes/future-prediction/secret-input';
+import { Route as AuthLoginIndexImport } from './routes/auth/login/index';
 
 // Create/Update Routes
+
+const AuthenticatedRoute = AuthenticatedImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRoute,
+} as any);
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const RandomGeneratorIndexRoute = RandomGeneratorIndexImport.update({
   id: '/random-generator/',
   path: '/random-generator/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
+
+const JobAppTrackerIndexRoute = JobAppTrackerIndexImport.update({
+  id: '/job-app-tracker/',
+  path: '/job-app-tracker/',
+  getParentRoute: () => rootRoute,
+} as any);
 
 const FuturePredictionIndexRoute = FuturePredictionIndexImport.update({
   id: '/future-prediction/',
   path: '/future-prediction/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const FuturePredictionSecretInputRoute =
   FuturePredictionSecretInputImport.update({
     id: '/future-prediction/secret-input',
     path: '/future-prediction/secret-input',
     getParentRoute: () => rootRoute,
-  } as any)
+  } as any);
+
+const AuthLoginIndexRoute = AuthLoginIndexImport.update({
+  id: '/auth/login/',
+  path: '/auth/login/',
+  getParentRoute: () => rootRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/_authenticated': {
+      id: '/_authenticated';
+      path: '';
+      fullPath: '';
+      preLoaderRoute: typeof AuthenticatedImport;
+      parentRoute: typeof rootRoute;
+    };
     '/future-prediction/secret-input': {
-      id: '/future-prediction/secret-input'
-      path: '/future-prediction/secret-input'
-      fullPath: '/future-prediction/secret-input'
-      preLoaderRoute: typeof FuturePredictionSecretInputImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/future-prediction/secret-input';
+      path: '/future-prediction/secret-input';
+      fullPath: '/future-prediction/secret-input';
+      preLoaderRoute: typeof FuturePredictionSecretInputImport;
+      parentRoute: typeof rootRoute;
+    };
     '/future-prediction/': {
-      id: '/future-prediction/'
-      path: '/future-prediction'
-      fullPath: '/future-prediction'
-      preLoaderRoute: typeof FuturePredictionIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/future-prediction/';
+      path: '/future-prediction';
+      fullPath: '/future-prediction';
+      preLoaderRoute: typeof FuturePredictionIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/job-app-tracker/': {
+      id: '/job-app-tracker/';
+      path: '/job-app-tracker';
+      fullPath: '/job-app-tracker';
+      preLoaderRoute: typeof JobAppTrackerIndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/random-generator/': {
-      id: '/random-generator/'
-      path: '/random-generator'
-      fullPath: '/random-generator'
-      preLoaderRoute: typeof RandomGeneratorIndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/random-generator/';
+      path: '/random-generator';
+      fullPath: '/random-generator';
+      preLoaderRoute: typeof RandomGeneratorIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/auth/login/': {
+      id: '/auth/login/';
+      path: '/auth/login';
+      fullPath: '/auth/login';
+      preLoaderRoute: typeof AuthLoginIndexImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute
-  '/future-prediction': typeof FuturePredictionIndexRoute
-  '/random-generator': typeof RandomGeneratorIndexRoute
+  '/': typeof IndexRoute;
+  '': typeof AuthenticatedRoute;
+  '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute;
+  '/future-prediction': typeof FuturePredictionIndexRoute;
+  '/job-app-tracker': typeof JobAppTrackerIndexRoute;
+  '/random-generator': typeof RandomGeneratorIndexRoute;
+  '/auth/login': typeof AuthLoginIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute
-  '/future-prediction': typeof FuturePredictionIndexRoute
-  '/random-generator': typeof RandomGeneratorIndexRoute
+  '/': typeof IndexRoute;
+  '': typeof AuthenticatedRoute;
+  '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute;
+  '/future-prediction': typeof FuturePredictionIndexRoute;
+  '/job-app-tracker': typeof JobAppTrackerIndexRoute;
+  '/random-generator': typeof RandomGeneratorIndexRoute;
+  '/auth/login': typeof AuthLoginIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute
-  '/future-prediction/': typeof FuturePredictionIndexRoute
-  '/random-generator/': typeof RandomGeneratorIndexRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexRoute;
+  '/_authenticated': typeof AuthenticatedRoute;
+  '/future-prediction/secret-input': typeof FuturePredictionSecretInputRoute;
+  '/future-prediction/': typeof FuturePredictionIndexRoute;
+  '/job-app-tracker/': typeof JobAppTrackerIndexRoute;
+  '/random-generator/': typeof RandomGeneratorIndexRoute;
+  '/auth/login/': typeof AuthLoginIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
+    | ''
     | '/future-prediction/secret-input'
     | '/future-prediction'
+    | '/job-app-tracker'
     | '/random-generator'
-  fileRoutesByTo: FileRoutesByTo
+    | '/auth/login';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
+    | ''
     | '/future-prediction/secret-input'
     | '/future-prediction'
+    | '/job-app-tracker'
     | '/random-generator'
+    | '/auth/login';
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/future-prediction/secret-input'
     | '/future-prediction/'
+    | '/job-app-tracker/'
     | '/random-generator/'
-  fileRoutesById: FileRoutesById
+    | '/auth/login/';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  FuturePredictionSecretInputRoute: typeof FuturePredictionSecretInputRoute
-  FuturePredictionIndexRoute: typeof FuturePredictionIndexRoute
-  RandomGeneratorIndexRoute: typeof RandomGeneratorIndexRoute
+  IndexRoute: typeof IndexRoute;
+  AuthenticatedRoute: typeof AuthenticatedRoute;
+  FuturePredictionSecretInputRoute: typeof FuturePredictionSecretInputRoute;
+  FuturePredictionIndexRoute: typeof FuturePredictionIndexRoute;
+  JobAppTrackerIndexRoute: typeof JobAppTrackerIndexRoute;
+  RandomGeneratorIndexRoute: typeof RandomGeneratorIndexRoute;
+  AuthLoginIndexRoute: typeof AuthLoginIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRoute,
   FuturePredictionSecretInputRoute: FuturePredictionSecretInputRoute,
   FuturePredictionIndexRoute: FuturePredictionIndexRoute,
+  JobAppTrackerIndexRoute: JobAppTrackerIndexRoute,
   RandomGeneratorIndexRoute: RandomGeneratorIndexRoute,
-}
+  AuthLoginIndexRoute: AuthLoginIndexRoute,
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -149,13 +214,19 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/_authenticated",
         "/future-prediction/secret-input",
         "/future-prediction/",
-        "/random-generator/"
+        "/job-app-tracker/",
+        "/random-generator/",
+        "/auth/login/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/_authenticated": {
+      "filePath": "_authenticated.tsx"
     },
     "/future-prediction/secret-input": {
       "filePath": "future-prediction/secret-input.tsx"
@@ -163,8 +234,14 @@ export const routeTree = rootRoute
     "/future-prediction/": {
       "filePath": "future-prediction/index.tsx"
     },
+    "/job-app-tracker/": {
+      "filePath": "job-app-tracker/index.tsx"
+    },
     "/random-generator/": {
       "filePath": "random-generator/index.tsx"
+    },
+    "/auth/login/": {
+      "filePath": "auth/login/index.tsx"
     }
   }
 }
