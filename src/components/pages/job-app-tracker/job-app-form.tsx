@@ -21,10 +21,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select.tsx';
+import { Button } from '@/components/ui/button.tsx';
+import { CreateJobApplicationParams } from '@/api/utils.ts';
 
 interface JobAppFormProps {
   drawerProps?: ComponentProps<typeof DrawerPrimitive.Root>;
-  onSubmit?: (data: JobApplication) => void;
+  onSubmit?: (data: CreateJobApplicationParams) => void;
   onCancel?: () => void;
   initialData?: JobApplication;
 }
@@ -32,26 +34,23 @@ interface JobAppFormProps {
 export default function JobAppForm({
   drawerProps,
   onSubmit,
-  onCancel,
   initialData,
 }: JobAppFormProps) {
   const form = useForm<JobApplicationZodType>({
     resolver: zodResolver(jobApplicationSchema),
     shouldFocusError: true,
     criteriaMode: 'all',
-    mode: 'all',
+    mode: 'onChange',
     progressive: true,
   });
 
   if (initialData) form.reset(initialData);
 
-  console.log(form.getValues());
-
   const formFields: Record<
-    keyof Omit<JobApplication, 'id'>,
+    keyof JobApplicationZodType,
     {
       element: (
-        props: ControllerRenderProps<FieldValues, string>,
+        field: ControllerRenderProps<FieldValues, string>,
       ) => ReactElement;
     }
   > = {
@@ -109,6 +108,12 @@ export default function JobAppForm({
   const formFieldNames = Object.keys(
     formFields,
   ) as (keyof JobApplicationZodType)[];
+
+  const requiredFieldNames: (keyof JobApplicationZodType)[] = [
+    'companyName',
+    'modality',
+    'position',
+  ];
   return (
     <Drawer {...drawerProps}>
       <DrawerContent>
@@ -116,14 +121,18 @@ export default function JobAppForm({
           <DrawerTitle>
             {initialData ? 'Edit' : 'Add'} Job Application
           </DrawerTitle>
-          <DrawerDescription>
-            {initialData
-              ? 'Edit the job application details'
-              : 'Add a new job application'}
+          <DrawerDescription className={'flex flex-row justify-between'}>
+            <p>
+              {initialData
+                ? 'Edit the job application details'
+                : 'Add a new job application'}
+            </p>
+            <p>* indicates a required field</p>
           </DrawerDescription>
         </DrawerHeader>
         <Form {...form}>
           <form
+            className={'p-3 flex flex-col gap-y-3'}
             onSubmit={form.handleSubmit((data) => {
               onSubmit?.(data);
               form.reset();
@@ -137,6 +146,7 @@ export default function JobAppForm({
                   <FormItem>
                     <FormLabel>
                       {camelCaseToTitle(name)}
+                      {requiredFieldNames.includes(name) && '*'}
                       {form.formState.errors[name] && (
                         <span className={'ml-1 animate-in delay-300x`'}>
                           ({form.formState.errors[name]?.message})
@@ -155,6 +165,9 @@ export default function JobAppForm({
                 )}
               />
             ))}
+            <Button type={'submit'} disabled={!form.formState.isValid}>
+              Submit
+            </Button>
           </form>
         </Form>
       </DrawerContent>

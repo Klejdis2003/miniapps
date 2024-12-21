@@ -11,12 +11,13 @@ import { JobApplication } from '@/api/types.ts';
 function createJobApplication(
   jobApplication: Pick<
     JobApplication,
-    'companyName' | 'modality' | 'position' | 'id'
+    'companyName' | 'modality' | 'position'
   > &
     Partial<JobApplication>,
 ): JobApplication {
   return {
-    status: 'applied',
+    id: jobApplication.id ?? Math.floor(Math.random() * 1000),
+    status: 'Applied',
     dateApplied: new Date(),
     ...jobApplication,
   };

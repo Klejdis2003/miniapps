@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 const jobApplicationSchema = z.object({
-  id: z.number().positive(),
   companyName: z
     .string()
     .min(1, { message: 'Company name should not be empty' }),

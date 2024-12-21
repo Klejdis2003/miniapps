@@ -26,6 +26,7 @@ export default function GuestPage() {
     const applications = state.applications;
     applications.push(newApplication);
     setState(savedState.update({ applications }));
+    setDrawerOpen(false);
   }
 
   function editApplication(
